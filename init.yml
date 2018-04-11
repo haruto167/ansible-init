@@ -39,7 +39,7 @@
         validate: '/usr/sbin/visudo -cf %s'
 
     - name: sshd conf1
-       lineinfile:
+      lineinfile:
          backup: yes
          path:  /etc/ssh/sshd_config
          regexp: '^\#Port 22'
