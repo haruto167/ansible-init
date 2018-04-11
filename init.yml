@@ -38,22 +38,28 @@
         line: "%{{user_name}} ALL=(ALL) NOPASSWD: ALL"
         validate: '/usr/sbin/visudo -cf %s'
 
-    - name: comment out PermitRootLogin yes
-      lineinfile:
-        backup: yes
-        path: /etc/ssh/sshd_config
-        state: present
-        regexp: "^PermitRootLogin yes"
-        regexp: "^#PermitRootLogin yes"
-        line: "#PermitRootLogin yes"
+     #SSH設定
+     - name: sshd_config_1
+       lineinfile:
+       backup: yes
+       path:  /etc/ssh/sshd_config
+       regexp: '^\#Port 22'
+       line: 'Port 22'
+       backrefs: yes
 
-    - name: add PermitRootLogin no
+    - name: sshd_config_2
       lineinfile:
-        path: /etc/ssh/sshd_config
-        state: present
-        regexp: "^PermitRootLogin no"
-        insertafter: '^#PermitRootLogin yes'
-        line: "PermitRootLogin no"
+      path:  /etc/ssh/sshd_config
+      regexp: '^\#PermitRootLogin yes'
+      line: 'PermitRootLogin no'
+      backrefs: yes
+
+    - name: sshd_config_3
+      lineinfile:
+      path:  /etc/ssh/sshd_config
+      regexp: '^PasswordAuthentication yes'
+      line: 'PasswordAuthentication no'
+      backrefs: yes
 
     - name: restart service sshd
       systemd:
