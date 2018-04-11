@@ -8,6 +8,7 @@ yum install -y ansible
 yum install epel-release
 
 #install init.yml file
+rm -r /tmp/ansible-init
 cd /tmp/
 git clone https://github.com/haruto167/ansible-init.git
 cd /tmp/ansible-init/
