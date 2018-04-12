@@ -16,3 +16,7 @@ cd /tmp/ansible-init/
 #ansible start
 echo 'ansible-playbook init.yml --extra-vars "user_name=$1"'
 ansible-playbook init.yml --extra-vars "user_name=$1 password=$2"
+
+#delete file
+rm -r /tmp/ansible-init
+
